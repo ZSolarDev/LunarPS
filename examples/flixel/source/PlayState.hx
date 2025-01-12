@@ -51,12 +51,6 @@ class PlayState extends FlxState
 		layer.id++;
 		tmr.startTimer(FlxG.elapsed);
 		FlxG.autoPause = false;
-		FlxG.fixedTimestep = false;
-		// var layer2 = new LunarRenderLayer();
-		// renderer.addLayer(layer2);
-		// layer2.add(basic);
-		// layer2.add(basic2);
-		// layer2.id = -1;
 	}
 
 	override public function update(elapsed:Float)
@@ -64,6 +58,5 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		emitter.onFrame(elapsed);
 		tmr.updateTimer(FlxG.elapsed);
-		info(tmr.timeLeft);
 	}
 }

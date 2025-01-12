@@ -1,0 +1,17 @@
+{
+    "name":"LunarLib",
+    "license": "MIT",
+    "version": "1.0.0",
+    "url": "https://github.com/ZSolarDev/LunarLib",
+    "description": "LunarLib: better general-framework features.",
+    "releasenote": "LunarLib Released.",
+    "contributors": [
+        "ZSolarDev",
+        "Aura"
+    ],
+    "dependencies": {},
+    "classPath": "src",
+    "tags": [
+        "haxe"
+    ]
+}
