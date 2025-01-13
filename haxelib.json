@@ -1,10 +1,10 @@
 {
     "name":"LunarLib",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "url": "https://github.com/ZSolarDev/LunarLib",
     "description": "LunarLib: better general-framework features.",
-    "releasenote": "LunarLib Released.",
+    "releasenote": "Modified readme to work on lib.haxe.org.",
     "contributors": [
         "ZSolarDev"
     ],

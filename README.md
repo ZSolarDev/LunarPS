@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="400" src="https://github.com/ZSolarDev/LunarLib/blob/main/assets/Logo-full-highres.png">
+  <img width="400" src="https://raw.githubusercontent.com/ZSolarDev/LunarLib/refs/heads/main/assets/Logo-full-highres.png">
   <br> Better general-framework features.
 </h1>
 
@@ -7,7 +7,7 @@
   <img width="140" src="https://badgen.net/haxelib/d/LunarLib?style=flat">
   <img width="150" src="https://badgen.net/haxelib/v/LunarLib?style=flat">
   <img width="125" src="https://badgen.net/haxelib/license/LunarLib?style=flat">
-  <img width="290" src="https://dcbadge.limes.pink/api/shield/1067570067790893208">
+  <img width="220" src="https://dcbadge.limes.pink/api/shield/1067570067790893208">
 </h1>
 
 # What *is* LunarLib?
