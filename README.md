@@ -7,6 +7,7 @@
   <img width="140" src="https://badgen.net/haxelib/d/LunarLib?style=flat">
   <img width="150" src="https://badgen.net/haxelib/v/LunarLib?style=flat">
   <img width="125" src="https://badgen.net/haxelib/license/LunarLib?style=flat">
+  <img width="290" src="https://dcbadge.limes.pink/api/shield/1067570067790893208">
 </h1>
 
 # What *is* LunarLib?
