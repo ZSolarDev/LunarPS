@@ -6,7 +6,6 @@
 <h1 align="center">
   <img width="130" src="https://badgen.net/haxelib/d/LunarLib">
   <img width="140" src="https://badgen.net/haxelib/v/LunarLib">
-  <img width="150" src="https://badgen.net/github/license/ZSolarDev/LunarLib">
 </h1>
 
 # What *is* LunarLib?
