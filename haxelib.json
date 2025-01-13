@@ -6,8 +6,7 @@
     "description": "LunarLib: better general-framework features.",
     "releasenote": "LunarLib Released.",
     "contributors": [
-        "ZSolarDev",
-        "Aura39"
+        "ZSolarDev"
     ],
     "dependencies": {},
     "classPath": "src",
