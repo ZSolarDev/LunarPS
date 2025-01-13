@@ -4,8 +4,9 @@
 </h1>
 
 <h1 align="center">
-  <img width="130" src="https://badgen.net/haxelib/d/LunarLib">
-  <img width="140" src="https://badgen.net/haxelib/v/LunarLib">
+  <img width="140" src="https://badgen.net/haxelib/d/LunarLib?style=flat">
+  <img width="150" src="https://badgen.net/haxelib/v/LunarLib?style=flat">
+  <img width="125" src="https://badgen.net/haxelib/license/LunarLib?style=flat">
 </h1>
 
 # What *is* LunarLib?
