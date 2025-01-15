@@ -1,6 +1,6 @@
 <h1 align="center">
-  <img width="400" src="https://raw.githubusercontent.com/ZSolarDev/LunarLib/refs/heads/main/assets/Logo-full-highres.png">
-  <br> Better general-framework features.
+  <img width="400" src="https://raw.githubusercontent.com/ZSolarDev/LunarPS/refs/heads/main/assets/Logo-full-highres.png">
+  <br> The new FlxEmitter.
 </h1>
 
 <h1 align="center">
@@ -10,13 +10,11 @@
   <img width="220" src="https://dcbadge.limes.pink/api/shield/1067570067790893208">
 </h1>
 
-# What *is* LunarLib?
-I want LunarLib to be something that can take features of a framework and make it better, maybe even optimizing it in the process. Currently, this only supports HaxeFlixel with these features:
-- Ultra-customizable particles
-- Improved renderer
-
-My goal was to make me able to write code in lunarlib for 1 framework, and have it fairly similar across multiple frameworks. To make this work, I use render backends. Currently there is only a FlixelRenderBackend, rendering the shapes and bases you put on it to render. [Visit the wiki for more info.](https://github.com/ZSolarDev/LunarLib/wiki/Renderer) I wanted the code to be interfaced in a framework-general way(same across all frameworks) but this meant I had to refrain from using some good things specific to said framework, so it will vary a *little*. I will make a conversion page from framework to framework when we have more than 1 framework supported.
+# What *is* LunarPS(LunarParticleSystem/LPS)?
+I want LunarPS to be a highly flexlble particle system for HaxeFlixel, *completely undefined* by default. I'm trying to give you control over ***EVERYTHING.*** you have control over the particle before it spawns, when it spawns, and every frame after it spawns. By default, it is a blank canvas, spawning particles in 1 spot. you can choose if they autospawn, and time between particle spawning; but that's all. You can even spawn your own batch of particles. To make effects easier, there is a particle system, which helps you manage multiple emitters; [Visit the wiki for more info.](https://github.com/ZSolarDev/LunarPS/wiki/Particles)
 
 # How do  I use it?
-1. There are some basic examples for Haxeflixel [here.](https://github.com/ZSolarDev/LunarLib/wiki/HaxeFlixel#-------lunarrenderer)
+1. There are some basic examples for Haxeflixel [here.](https://github.com/ZSolarDev/LunarPS/wiki/HaxeFlixel#-------lunarrenderer)
 2. Read the wiki.
+
+# What does it look like?

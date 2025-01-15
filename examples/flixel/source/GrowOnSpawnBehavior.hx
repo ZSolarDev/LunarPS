@@ -1,8 +1,8 @@
 package;
 
-import lunarlib.math.*;
-import lunarlib.particles.*;
-import lunarlib.particles.LunarParticleBehavior;
+import lunarps.math.*;
+import lunarps.particles.*;
+import lunarps.particles.LunarParticleBehavior;
 
 class GrowOnSpawnBehavior extends LunarParticleBehavior
 {

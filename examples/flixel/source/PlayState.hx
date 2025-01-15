@@ -3,14 +3,14 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.util.FlxTimer;
-import lunarlib.LunarBase;
-import lunarlib.LunarShape.LunarCircle;
-import lunarlib.LunarShape.LunarRect;
-import lunarlib.LunarShape.LunarTexture;
-import lunarlib.particles.LunarParticleEmitter;
-import lunarlib.particles.behaviors.*;
-import lunarlib.renderer.LunarRenderLayer;
-import lunarlib.renderer.LunarRenderer;
+import lunarps.LunarBase;
+import lunarps.LunarShape.LunarCircle;
+import lunarps.LunarShape.LunarRect;
+import lunarps.LunarShape.LunarTexture;
+import lunarps.particles.LunarParticleEmitter;
+import lunarps.particles.behaviors.*;
+import lunarps.renderer.LunarRenderLayer;
+import lunarps.renderer.LunarRenderer;
 
 class PlayState extends FlxState
 {
@@ -25,7 +25,7 @@ class PlayState extends FlxState
 		super.create();
 		FlxG.updateFramerate = 250;
 		FlxG.drawFramerate = 250;
-		renderer = new LunarRenderer(SINGLE_BITMAP, {
+		renderer = new LunarRenderer({
 			x: 0,
 			y: 0,
 			width: FlxG.width,

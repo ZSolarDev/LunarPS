@@ -1,16 +1,22 @@
 {
     "name":"LunarLib",
     "license": "MIT",
-    "version": "1.0.2",
-    "url": "https://github.com/ZSolarDev/LunarLib",
-    "description": "LunarLib: better general-framework features.",
-    "releasenote": "Modified readme to work on lib.haxe.org.",
+    "version": "1.0.0",
+    "url": "https://github.com/ZSolarDev/LunarPS",
+    "description": "LunarPS(LunarParticleSystem/LPS): the new FlxEmitter.",
+    "releasenote": "",
     "contributors": [
-        "ZSolarDev"
+        "ZSolarDev",
+        "Aura39"
     ],
-    "dependencies": {},
+    "dependencies": {
+        "flixel": "",
+        "openfl": ""
+    },
     "classPath": "src",
     "tags": [
-        "haxe"
+        "haxe",
+        "flixel",
+        "particles"
     ]
 }
