@@ -1,10 +1,10 @@
 {
     "name":"LunarLib",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS(LunarParticleSystem/LPS): the new FlxEmitter.",
-    "releasenote": "",
+    "releasenote": "Reworked the libraries concept (LunarLib -> LunarPS), removed polygons/triangles, removed render modes(only MeshFactory is supported), fixed the LunarFadeParticleBehavior",
     "contributors": [
         "ZSolarDev",
         "Aura39"
