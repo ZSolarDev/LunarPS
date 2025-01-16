@@ -23,7 +23,6 @@ class LunarLifeParticleBehavior extends LunarParticleBehavior
 		particle.values.timer.startTimer(emitter.curDt, lifeSecs, 0);
 		particle.values.timer.timerCompleted = () ->
 		{
-			trace('rehehehehaaa');
 			lifeEndedCallback(particle, emitter, emitter.curDt);
 		}
 	}

@@ -1,4 +1,4 @@
-package lunarps.haxe; // This code wasn't yet released at the time of writing this comment lmaooo
+package lunarps.haxe; // This code wasn't yet released at the time of writing this comment
 
 import haxe.ds.IntMap;
 import haxe.ds.List;
