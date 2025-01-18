@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "Added Behavior Paks, and added a SignalParticleBehavior which adds callbacks for preParticleSpawn, onParticleSpawn, and onParticleFrame.",
+    "releasenote": "LunarBehaviorPack -> LunarParticleBehaviorPack",
     "contributors": [
         "ZSolarDev",
         "Aura39"

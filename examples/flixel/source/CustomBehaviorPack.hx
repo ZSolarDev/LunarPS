@@ -2,7 +2,7 @@ import lunarps.math.*;
 import lunarps.particles.*;
 import lunarps.particles.behaviors.*;
 
-class CustomBehaviorPack extends LunarBehaviorPack
+class CustomBehaviorPack extends LunarParticleBehaviorPack
 {
 	var fadeBehavior:LunarFadeParticleBehavior = new LunarFadeParticleBehavior();
 	var growBehavior:GrowOnSpawnBehavior = new GrowOnSpawnBehavior();
