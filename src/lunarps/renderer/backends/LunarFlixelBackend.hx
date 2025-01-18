@@ -4,7 +4,6 @@ import flixel.FlxG;
 import flixel.util.FlxSort;
 import lunarps.LunarBase;
 import lunarps.renderer.backends.flixel.MeshFactory;
-import lunarps.renderer.backends.flixel.Shaders;
 
 typedef TransformProperties =
 {

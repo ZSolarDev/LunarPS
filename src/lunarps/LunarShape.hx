@@ -1,11 +1,8 @@
 package lunarps;
 
-import flixel.util.FlxColor;
 import lunarps.abstracts.LunarVarAbstract;
 import lunarps.haxe.Copy;
 import lunarps.math.LunarMath;
-import lunarps.math.LunarVector2;
-import lunarps.math.LunarVector3;
 import lunarps.renderer.backends.flixel.Shaders;
 
 enum LunarShapeType

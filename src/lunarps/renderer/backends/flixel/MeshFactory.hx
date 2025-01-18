@@ -1,20 +1,13 @@
 package lunarps.renderer.backends.flixel;
 
 import flixel.FlxCamera;
-import flixel.FlxSprite;
-import flixel.FlxStrip;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.tile.FlxDrawTrianglesItem.DrawData;
-import flixel.math.FlxPoint;
-import flixel.util.FlxSpriteUtil;
 import lime.graphics.Image;
 import lunarps.LunarBase;
 import lunarps.LunarShape;
-import lunarps.math.LunarMath;
 import lunarps.math.LunarVector2;
 import lunarps.math.LunarVector4;
-import lunarps.renderer.backends.flixel.Shaders.AlphaShader;
-import lunarps.renderer.backends.flixel.Shaders.CircleShader;
 import openfl.display.BitmapData;
 
 typedef MeshData =
@@ -28,22 +21,6 @@ typedef MeshData =
 
 class MeshFactory extends FlxCamera
 {
-	/*
-		public static function createCircle(radius:Float, segments:Int):LunarShape
-		{
-			var shape = new LunarShape();
-			var angle = 0;
-			var angleStep = 360 / segments;
-			for (i in 0...segments)
-			{
-				var x = Math.cos(angle * Math.PI / 180) * radius;
-				var y = Math.sin(angle * Math.PI / 180) * radius;
-				shape.addPoint(x, y);
-				angle += angleStep;
-			}
-			return shape;
-		}
-	 */
 	public function getMeshFromRect(rect:LunarVector4<Float>, color:Int):MeshData
 	{
 		var vertices:DrawData<Float>;

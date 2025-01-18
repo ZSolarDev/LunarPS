@@ -1,6 +1,5 @@
 package lunarps;
 
-import flixel.FlxBasic;
 import haxe.PosInfos;
 
 /**

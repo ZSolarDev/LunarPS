@@ -1,7 +1,6 @@
 package lunarps.renderer.backends.flixel;
 
 import flixel.system.FlxAssets.FlxShader;
-import openfl.display.ShaderParameter;
 
 class CircleShader extends FlxShader
 {
@@ -42,9 +41,6 @@ class AlphaShader extends FlxShader
 	{
 		super();
 		shaderAlpha = alpha;
-		////var alphaParam = new ShaderParameter<Float>();
-		////alphaParam.value = [alpha];
-		////this.shaderAlpha = alphaParam;
 	}
 
 	function set_shaderAlpha(val:Float):Float

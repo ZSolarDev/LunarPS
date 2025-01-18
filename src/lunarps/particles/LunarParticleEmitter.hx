@@ -1,6 +1,5 @@
 package lunarps.particles;
 
-import flixel.FlxG;
 import lunarps.renderer.LunarRenderLayer;
 import lunarps.renderer.LunarRenderer;
 
@@ -23,9 +22,9 @@ class LunarParticleEmitter
 	public var autoSpawning:Bool = true;
 	public var curDt:Float = 0;
 
-	public function new(?x:Float = 0, ?y:Float = 0, ?renderer:LunarRenderer, ?emitterLayer:LunarRenderLayer,
-			#if flixelMode ?addRendererToCurState:Bool = true, #end ?rendererWidth:Int = 0, ?rendererHeight:Int = 0, ?particleConfig:LunarShape,
-			?mainParticleBehavior:LunarParticleBehavior, ?autoSpawning:Bool = true, ?waitingSecs:Float = 0.1)
+	public function new(?x:Float = 0, ?y:Float = 0, ?renderer:LunarRenderer, ?emitterLayer:LunarRenderLayer, ?addRendererToCurState:Bool = true,
+			?rendererWidth:Int = 0, ?rendererHeight:Int = 0, ?particleConfig:LunarShape, ?mainParticleBehavior:LunarParticleBehavior,
+			?autoSpawning:Bool = true, ?waitingSecs:Float = 0.1)
 	{
 		this.x = x;
 		this.y = y;
@@ -71,10 +70,18 @@ class LunarParticleEmitter
 		try
 		{
 			if (addRendererToCurState)
-				FlxG.state.add(this.renderer);
+				flixel.FlxG.state.add(this.renderer);
 		}
 		catch (e:Dynamic) {}
 		#end
+	}
+
+	public function addBehaviorPack(pack:LunarBehaviorPack, overwriteMainBehavior:Bool = true)
+	{
+		if (overwriteMainBehavior)
+			mainParticleBehavior = pack.mainBehavior;
+		for (behavior in pack.sideBehaviors.keys())
+			addBehavior(behavior, pack.sideBehaviors.get(behavior));
 	}
 
 	public function spawnParticle(shape:LunarShape)

@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.util.FlxTimer;
 import lunarps.LunarBase;
 import lunarps.LunarShape.LunarCircle;
 import lunarps.LunarShape.LunarRect;
@@ -15,8 +14,7 @@ import lunarps.renderer.LunarRenderer;
 class PlayState extends FlxState
 {
 	var emitter:LunarParticleEmitter;
-	var fadeBehavior:LunarFadeParticleBehavior = new LunarFadeParticleBehavior();
-	var spawnEffectBehavior:GrowOnSpawnBehavior = new GrowOnSpawnBehavior();
+	var coolBehaviorPack:CustomBehaviorPack = new CustomBehaviorPack();
 	var renderer:LunarRenderer;
 	var tmr:LunarTimer = new LunarTimer();
 
@@ -32,14 +30,9 @@ class PlayState extends FlxState
 			height: FlxG.height
 		});
 		add(renderer);
-		emitter = new LunarParticleEmitter(60, 60, renderer, true, new LunarTexture(0xFFAD0A0A, 'assets/breh.png', 60, 60),
-			new LunarRandSpawnOffsetParticleBehavior(100, 100));
-		emitter.addBehavior('spawn effect brahh..', spawnEffectBehavior);
-		emitter.addBehavior('time is ticking!', fadeBehavior);
-		fadeBehavior.fadeStartedCallback = (particle, emitter, dt) ->
-		{
-			particle.behavior = new LunarGravityParticleBehavior(1);
-		};
+		emitter = new LunarParticleEmitter(60, 60, renderer, true, new LunarCircle(0xFFAD0A0A, 60), new LunarRandSpawnOffsetParticleBehavior(100, 100));
+		emitter.addBehaviorPack(coolBehaviorPack, false);
+
 		var basic:LunarBase = new LunarBase(10, 10);
 		basic.shape = new LunarTexture(0xFFAD0A0A, 'assets/breh.png', 60, 60);
 		var basic2:LunarBase = new LunarBase(60, 60);

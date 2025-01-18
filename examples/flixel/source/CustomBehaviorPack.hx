@@ -1,8 +1,23 @@
-package;
-
 import lunarps.math.*;
 import lunarps.particles.*;
-import lunarps.particles.LunarParticleBehavior;
+import lunarps.particles.behaviors.*;
+
+class CustomBehaviorPack extends LunarBehaviorPack
+{
+	var fadeBehavior:LunarFadeParticleBehavior = new LunarFadeParticleBehavior();
+	var growBehavior:GrowOnSpawnBehavior = new GrowOnSpawnBehavior();
+
+	public function new()
+	{
+		super();
+		sideBehaviors.set('time is ticking...!', fadeBehavior);
+		sideBehaviors.set('let the particles grow', growBehavior);
+		fadeBehavior.fadeStartedCallback = (particle, emitter, dt) ->
+		{
+			particle.behavior = new LunarGravityParticleBehavior(1);
+		};
+	}
+}
 
 class GrowOnSpawnBehavior extends LunarParticleBehavior
 {

@@ -1,10 +1,10 @@
 {
-    "name":"LunarLib",
+    "name":"LunarPS",
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "1.1.0",
     "url": "https://github.com/ZSolarDev/LunarPS",
-    "description": "LunarPS(LunarParticleSystem/LPS): the new FlxEmitter.",
-    "releasenote": "Reworked the libraries concept (LunarLib -> LunarPS), removed polygons/triangles, removed render modes(only MeshFactory is supported), fixed the LunarFadeParticleBehavior",
+    "description": "LunarPS: the new FlxEmitter.",
+    "releasenote": "Added Behavior Paks, and added a SignalParticleBehavior which adds callbacks for preParticleSpawn, onParticleSpawn, and onParticleFrame.",
     "contributors": [
         "ZSolarDev",
         "Aura39"

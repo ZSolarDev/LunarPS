@@ -76,6 +76,14 @@ class LunarParticleEmitter
 		#end
 	}
 
+	public function addBehaviorPack(pack:LunarBehaviorPack, overwriteMainBehavior:Bool = true)
+	{
+		if (overwriteMainBehavior)
+			mainParticleBehavior = pack.mainBehavior;
+		for (behavior in pack.sideBehaviors.keys())
+			addBehavior(behavior, pack.sideBehaviors.get(behavior));
+	}
+
 	public function spawnParticle(shape:LunarShape)
 	{
 		if (mainParticleBehavior.preParticleSpawn(shape, this))
