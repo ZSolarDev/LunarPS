@@ -5,21 +5,13 @@ import flixel.util.FlxSort;
 import lunarps.LunarBase;
 import lunarps.renderer.backends.flixel.MeshFactory;
 
-typedef TransformProperties =
-{
-	var x:Float;
-	var y:Float;
-	var width:Int;
-	var height:Int;
-}
-
 class LunarFlixelBackend extends flixel.FlxBasic
 {
 	public var x:Float;
 	public var y:Float;
 	public var meshFactory:MeshFactory;
 
-	public function new(?transformProps:TransformProperties)
+	public function new(?transformProps:lunarps.math.LunarTransformProperties)
 	{
 		super();
 		this.x = transformProps.x;

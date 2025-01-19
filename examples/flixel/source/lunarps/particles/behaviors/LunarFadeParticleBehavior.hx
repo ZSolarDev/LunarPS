@@ -10,7 +10,7 @@ class LunarFadeParticleBehavior extends LunarLifeParticleBehavior
 	public var fadeOnFrameCallback:(particle:LunarParticle, emitter:LunarParticleEmitter, dt:Float) -> Void = (particle, emitter, dt) -> {};
 	public var fadeEndedCallback:(particle:LunarParticle, emitter:LunarParticleEmitter, dt:Float) -> Void = (particle, emitter, dt) ->
 	{
-		particle.kill();
+		particle = null;
 		emitter.particles.remove(particle);
 		emitter.renderer.remove(particle);
 	};

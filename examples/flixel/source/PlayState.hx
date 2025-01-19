@@ -30,7 +30,9 @@ class PlayState extends FlxState
 			height: FlxG.height
 		});
 		add(renderer);
-		emitter = new LunarParticleEmitter(60, 60, renderer, true, new LunarCircle(0xFFAD0A0A, 60), new LunarRandSpawnOffsetParticleBehavior(100, 100));
+		emitter = new LunarParticleEmitter(60, 60, renderer, new LunarCircle(0xFFAD0A0A, 60), {}, {
+			mainParticleBehavior: new LunarRandSpawnOffsetParticleBehavior(100, 100)
+		});
 		emitter.addBehaviorPack(coolBehaviorPack, false);
 
 		var basic:LunarBase = new LunarBase(10, 10);

@@ -3,6 +3,21 @@ package lunarps.particles;
 import lunarps.renderer.LunarRenderLayer;
 import lunarps.renderer.LunarRenderer;
 
+typedef RendererProps =
+{
+	var ?width:Int;
+	var ?height:Int;
+	var ?emitterLayer:LunarRenderLayer;
+	var ?addRendererToCurState:Bool;
+}
+
+typedef MiscProps =
+{
+	var ?mainParticleBehavior:LunarParticleBehavior;
+	var ?autoSpawning:Bool;
+	var ?waitingSecs:Float;
+}
+
 class LunarParticleEmitter
 {
 	public var x:Float = 0;
@@ -22,23 +37,25 @@ class LunarParticleEmitter
 	public var autoSpawning:Bool = true;
 	public var curDt:Float = 0;
 
-	public function new(?x:Float = 0, ?y:Float = 0, ?renderer:LunarRenderer, ?emitterLayer:LunarRenderLayer, ?addRendererToCurState:Bool = true,
-			?rendererWidth:Int = 0, ?rendererHeight:Int = 0, ?particleConfig:LunarShape, ?mainParticleBehavior:LunarParticleBehavior,
-			?autoSpawning:Bool = true, ?waitingSecs:Float = 0.1)
+	public function new(x:Float = 0, y:Float = 0, renderer:LunarRenderer, particleConfig:LunarShape, rendererProps:RendererProps, miscProps:MiscProps)
 	{
 		this.x = x;
 		this.y = y;
-		this.rendererWidth = rendererWidth;
-		this.rendererHeight = rendererHeight;
+		if (rendererProps.width != null)
+			this.rendererWidth = rendererProps.width;
+		if (rendererProps.height != null)
+			this.rendererHeight = rendererProps.height;
 
-		setRenderer(renderer, emitterLayer #if (flixelMode), addRendererToCurState #end);
+		setRenderer(renderer, rendererProps.emitterLayer, rendererProps.addRendererToCurState);
 		this.particleConfig = particleConfig;
-		this.mainParticleBehavior = mainParticleBehavior;
-		this.autoSpawning = autoSpawning;
-		this.waitingSecs = waitingSecs;
+		this.mainParticleBehavior = miscProps.mainParticleBehavior;
+		if (miscProps.autoSpawning != null)
+			this.autoSpawning = miscProps.autoSpawning;
+		if (miscProps.waitingSecs != null)
+			this.waitingSecs = miscProps.waitingSecs;
 	}
 
-	public function setRenderer(renderer:LunarRenderer, particleEmitterLayer:LunarRenderLayer #if (flixelMode), addRendererToCurState:Bool = true #end)
+	public function setRenderer(renderer:LunarRenderer, particleEmitterLayer:LunarRenderLayer, addRendererToCurState:Bool = true)
 	{
 		if (particleEmitterLayer != null)
 		{
@@ -86,7 +103,7 @@ class LunarParticleEmitter
 
 	public function spawnParticle(shape:LunarShape)
 	{
-		if (mainParticleBehavior.preParticleSpawn(shape, this))
+		inline function spawn()
 		{
 			var particle = new LunarParticle(x, y, this);
 			particle.shape = shape.copy();
@@ -96,6 +113,11 @@ class LunarParticleEmitter
 			for (behavior in sideParticleBehaviors)
 				behavior.onParticleSpawn(particle, this);
 		}
+		if (mainParticleBehavior != null)
+			if (mainParticleBehavior.preParticleSpawn(shape, this))
+				spawn();
+			else
+				spawn();
 	}
 
 	public function addBehavior(name:String, behavior:LunarParticleBehavior)
@@ -128,9 +150,12 @@ class LunarParticleEmitter
 		for (p in particles)
 		{
 			p.onFrame(dt);
-			mainParticleBehavior.onParticleFrame(p, this, dt);
-			for (behavior in sideParticleBehaviors)
-				behavior.onParticleFrame(p, this, dt);
+			if (p != null)
+			{
+				mainParticleBehavior.onParticleFrame(p, this, dt);
+				for (behavior in sideParticleBehaviors)
+					behavior.onParticleFrame(p, this, dt);
+			}
 		}
 	}
 
