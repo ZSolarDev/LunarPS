@@ -114,10 +114,12 @@ class LunarParticleEmitter
 				behavior.onParticleSpawn(particle, this);
 		}
 		if (mainParticleBehavior != null)
+		{
 			if (mainParticleBehavior.preParticleSpawn(shape, this))
 				spawn();
-			else
-				spawn();
+		}
+		else
+			spawn();
 	}
 
 	public function addBehavior(name:String, behavior:LunarParticleBehavior)

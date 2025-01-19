@@ -95,8 +95,6 @@ class LGUtils
 
 	public static function init()
 	{
-		#if flixelMode
 		flixel.FlxG.fixedTimestep = false;
-		#end
 	}
 }

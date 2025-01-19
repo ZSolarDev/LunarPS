@@ -35,7 +35,7 @@ class ApplicationMain
 		ManifestResources.init(config);
 		#end
 
-		app.meta["build"] = "26";
+		app.meta["build"] = "27";
 		app.meta["company"] = "HaxeFlixel";
 		app.meta["file"] = "LunarPS";
 		app.meta["name"] = "LunarPS";
