@@ -76,7 +76,7 @@ class LunarParticleEmitter
 		#end
 	}
 
-	public function addBehaviorPack(pack:LunarBehaviorPack, overwriteMainBehavior:Bool = true)
+	public function addBehaviorPack(pack:LunarParticleBehaviorPack, overwriteMainBehavior:Bool = true)
 	{
 		if (overwriteMainBehavior)
 			mainParticleBehavior = pack.mainBehavior;

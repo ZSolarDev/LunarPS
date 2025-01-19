@@ -1,6 +1,6 @@
 package lunarps.particles;
 
-class LunarBehaviorPack
+class LunarParticleBehaviorPack
 {
 	public var mainBehavior:LunarParticleBehavior;
 	public var sideBehaviors:Map<String, LunarParticleBehavior> = new Map();

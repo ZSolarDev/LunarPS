@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "LunarBehaviorPack -> LunarParticleBehaviorPack",
+    "releasenote": "You can actually compile.",
     "contributors": [
         "ZSolarDev",
         "Aura39"
