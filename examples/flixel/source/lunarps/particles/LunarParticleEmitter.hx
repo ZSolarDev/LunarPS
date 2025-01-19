@@ -109,7 +109,8 @@ class LunarParticleEmitter
 			particle.shape = shape.copy();
 			particles.push(particle);
 			renderer.add(particle);
-			mainParticleBehavior.onParticleSpawn(particle, this);
+			if (mainParticleBehavior != null)
+				mainParticleBehavior.onParticleSpawn(particle, this);
 			for (behavior in sideParticleBehaviors)
 				behavior.onParticleSpawn(particle, this);
 		}
@@ -154,7 +155,8 @@ class LunarParticleEmitter
 			p.onFrame(dt);
 			if (p != null)
 			{
-				mainParticleBehavior.onParticleFrame(p, this, dt);
+				if (mainParticleBehavior != null)
+					mainParticleBehavior.onParticleFrame(p, this, dt);
 				for (behavior in sideParticleBehaviors)
 					behavior.onParticleFrame(p, this, dt);
 			}

@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "LunarParticleEmitter: particles spawn when mainParticleBehavior is null.",
+    "releasenote": "LunarParticleEmitter: actually works without mainParticleBehavior.",
     "contributors": [
         "ZSolarDev",
         "Aura39"
