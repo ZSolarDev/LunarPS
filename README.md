@@ -11,10 +11,10 @@
 </h1>
 
 # What *is* LunarPS?
-I want LunarPS(aka LunarParticleSystem/LPS) to be a highly flexlble particle system for HaxeFlixel, *completely undefined* by default. I'm trying to give you control over ***EVERYTHING.*** you have control over the particle before it spawns, when it spawns, and every frame after it spawns. By default, it is a blank canvas, spawning particles in 1 spot. you can choose if they autospawn, and time between particle spawning; but that's all. You can even spawn your own batch of particles. To make effects easier, there is a particle system, which helps you manage multiple emitters; [Visit the wiki for more info.](https://github.com/ZSolarDev/LunarPS/wiki/Particles)
+I want LunarPS(aka LunarParticleSystem/LPS) to be a highly flexlble particle system for HaxeFlixel, *completely undefined* by default. I'm trying to give you control over ***EVERYTHING.*** you have control over the particle before it spawns, when it spawns, and every frame after it spawns. By default, it is a blank canvas, spawning particles in 1 spot. you can choose if they autospawn, and time between particle spawning; but that's all. you define how they move every frame, how/when they die(if they even die at all), you could give them a state system, you can give them physics, almost everything your mind can imagine! You can even spawn your own batch of particles. To make effects easier, there is a particle system, which helps you manage multiple emitters; [Visit the wiki for more info.](https://github.com/ZSolarDev/LunarPS/wiki/Particles)
 
 # How do  I use it?
-1. There are some basic examples for Haxeflixel [here.](https://github.com/ZSolarDev/LunarPS/wiki/HaxeFlixel#-------lunarrenderer)
+1. There are some basic examples [here.](https://github.com/ZSolarDev/LunarPS/wiki/Renderer#-------lunarrenderer)
 2. Read the wiki.
 
 # What does it look like?
