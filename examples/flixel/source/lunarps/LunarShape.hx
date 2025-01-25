@@ -1,7 +1,6 @@
 package lunarps;
 
 import lunarps.abstracts.LunarVarAbstract;
-import lunarps.haxe.Copy;
 import lunarps.math.LunarMath;
 import lunarps.renderer.backends.flixel.Shaders;
 

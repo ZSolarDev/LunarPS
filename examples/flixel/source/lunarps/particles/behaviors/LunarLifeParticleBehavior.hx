@@ -17,7 +17,7 @@ class LunarLifeParticleBehavior extends LunarParticleBehavior
 	override public function onParticleSpawn(particle:LunarParticle, emitter:LunarParticleEmitter)
 	{
 		if (particle.values.timer == null)
-			particle.values.timer = new LunarTimer();
+			particle.values.timer = new lunarps.LGUtils.LunarTimer();
 		particle.values.timer.startTimer(lifeSecs, 0);
 		particle.values.timer.timerCompleted = () ->
 		{
