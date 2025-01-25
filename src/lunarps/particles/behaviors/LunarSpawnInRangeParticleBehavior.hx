@@ -1,6 +1,6 @@
 package lunarps.particles.behaviors;
 
-class LunarRandSpawnOffsetParticleBehavior extends LunarParticleBehavior
+class LunarSpawnInRangeParticleBehavior extends LunarParticleBehavior
 {
 	public var rangeX:Float = 20;
 	public var rangeY:Float = 20;

@@ -38,12 +38,6 @@ class LunarParticleSystem
 			Reflect.setProperty(e, prop, val);
 	}
 
-	public function onFrame(dt:Float)
-	{
-		for (e in emitters)
-			e.onFrame(dt);
-	}
-
 	public function kill()
 	{
 		for (emitter in emitters)

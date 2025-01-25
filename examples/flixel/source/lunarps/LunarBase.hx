@@ -2,7 +2,7 @@ package lunarps;
 
 import lunarps.LunarShape;
 
-class LunarBase
+class LunarBase extends LunarPoolable
 {
 	public var x:Float;
 	public var y:Float;
@@ -10,8 +10,9 @@ class LunarBase
 	public var visible:Bool = true;
 	public var shape:LunarShape;
 
-	public function new(x:Float, y:Float)
+	override public function new(x:Float, y:Float)
 	{
+		super();
 		this.x = x;
 		this.y = y;
 	}

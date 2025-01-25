@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "1.1.5",
+    "version": "2.0.0",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "LunarParticleEmitter: actually works without mainParticleBehavior.",
+    "releasenote": "Added 7 new behaviors, removed the need for Copy.hx, fixed a memory leak in LunarParticleEmitter, improved LunarParticleEmitter, addded rotation, replaced LunarCircles radius with width and height, made the example into a demo.",
     "contributors": [
         "ZSolarDev",
         "Aura39"

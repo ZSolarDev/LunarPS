@@ -1,3 +1,4 @@
+import lunarps.LunarShape.LunarCircle;
 import lunarps.math.*;
 import lunarps.particles.*;
 import lunarps.particles.behaviors.*;
@@ -25,10 +26,12 @@ class GrowOnSpawnBehavior extends LunarParticleBehavior
 	{
 		if (particle.shape.shapeType == CIRCLE)
 		{
-			var circ = cast particle.shape;
+			var circ:LunarCircle = cast particle.shape;
 			particle.values.r = 0.0;
-			particle.values.oldRadius = circ.radius;
-			circ.radius = 1;
+			particle.values.oldWidth = circ.width;
+			circ.width = 1;
+			particle.values.oldHeight = circ.height;
+			circ.height = 1;
 		}
 	}
 
@@ -36,9 +39,10 @@ class GrowOnSpawnBehavior extends LunarParticleBehavior
 	{
 		if (particle.shape.shapeType == CIRCLE)
 		{
-			var circ = cast particle.shape;
+			var circ:LunarCircle = cast particle.shape;
 			particle.values.r += dt / 2;
-			circ.radius = cast LunarInterp.easedInterp(circ.radius, particle.values.oldRadius, particle.values.r, 'smootherStepInOut');
+			circ.width = cast LunarInterp.easedInterp(circ.width, particle.values.oldWidth, particle.values.r, 'smootherStepInOut');
+			circ.height = cast LunarInterp.easedInterp(circ.height, particle.values.oldHeight, particle.values.r, 'smootherStepInOut');
 		}
 	}
 }

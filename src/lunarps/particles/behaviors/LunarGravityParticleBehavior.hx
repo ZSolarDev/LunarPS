@@ -13,6 +13,5 @@ class LunarGravityParticleBehavior extends LunarVelocityParticleBehavior
 	override public function onParticleFrame(particle:LunarParticle, emitter:LunarParticleEmitter, dt:Float)
 	{
 		particle.values.velocity.y += gravity * dt;
-		super.onParticleFrame(particle, emitter, dt);
 	}
 }

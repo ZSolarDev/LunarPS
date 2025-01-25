@@ -2,6 +2,17 @@ package lunarps.particles;
 
 class LunarParticleBehavior
 {
+	/**
+	 * This function removes a particle from its emitter.
+	 * @param particle 
+	 * @param emitter 
+	 */
+	public static function killParticle(particle:LunarParticle)
+	{
+		particle.kill();
+		particle.dead = true;
+	}
+
 	public function new() {}
 
 	/**
