@@ -1,5 +1,7 @@
 package lunarps.particles;
 
+import lunarps.LunarShape;
+
 class LunarParticle extends LunarBase
 {
 	/**
@@ -26,6 +28,8 @@ class LunarParticle extends LunarBase
 
 	function set_behavior(value:LunarParticleBehavior):LunarParticleBehavior
 	{
+		if (value == null)
+			return null;
 		behavior = value;
 		behavior.onParticleSpawn(this, emitter);
 		return value;
@@ -43,5 +47,19 @@ class LunarParticle extends LunarBase
 	{
 		super.onFrame(dt);
 		behavior.onParticleFrame(this, emitter, dt);
+	}
+
+	override public function kill()
+	{
+		super.kill();
+		// To prevent null access
+		shape = new LunarRect(0x0, 0, 0);
+		behavior = null;
+		for (v in values)
+			try
+			{
+				v = null;
+			}
+			catch (_) {}
 	}
 }

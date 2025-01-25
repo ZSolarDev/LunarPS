@@ -1,19 +1,17 @@
 package lunarps.particles;
 
+import flixel.FlxG;
+import lunarps.abstracts.LunarVarAbstract;
 import lunarps.renderer.LunarRenderLayer;
 import lunarps.renderer.LunarRenderer;
-
-typedef RendererProps =
-{
-	var ?width:Int;
-	var ?height:Int;
-	var ?emitterLayer:LunarRenderLayer;
-	var ?addRendererToCurState:Bool;
-}
+import openfl.events.Event;
 
 typedef MiscProps =
 {
 	var ?mainParticleBehavior:LunarParticleBehavior;
+	var ?sideParticleBehaviors:Map<String, LunarParticleBehavior>;
+	var ?maxParticles:Int;
+	var ?particlesPerWaitingSecs:Int;
 	var ?autoSpawning:Bool;
 	var ?waitingSecs:Float;
 }
@@ -22,75 +20,38 @@ class LunarParticleEmitter
 {
 	public var x:Float = 0;
 	public var y:Float = 0;
-	public var rendererWidth:Int = 0;
-	public var rendererHeight:Int = 0;
 	public var emitterLayer:LunarRenderLayer;
 	public var particleConfig:LunarShape;
-	public var personalRenderer:Bool = false;
-	public var personalEmitter:Bool = false;
 	public var renderer:LunarRenderer;
-	public var particles:Array<LunarParticle> = [];
+	public var particles:LunarPool<LunarParticle> = new LunarPool<LunarParticle>();
 	public var mainParticleBehavior:LunarParticleBehavior;
 	public var sideParticleBehaviors:Map<String, LunarParticleBehavior> = new Map();
 	public var waitingSecs:Float = 0.1;
+	public var particlesPerWaitingSecs:Int = 1;
+	public var maxParticles:Int = 0;
 	public var curSecs:Float = 0;
 	public var autoSpawning:Bool = true;
 	public var curDt:Float = 0;
 
-	public function new(x:Float = 0, y:Float = 0, renderer:LunarRenderer, particleConfig:LunarShape, rendererProps:RendererProps, miscProps:MiscProps)
+	public function new(x:Float = 0, y:Float = 0, renderer:LunarRenderer, particleConfig:LunarShape, ?emitterLayer:LunarRenderLayer, miscProps:MiscProps)
 	{
 		this.x = x;
 		this.y = y;
-		if (rendererProps.width != null)
-			this.rendererWidth = rendererProps.width;
-		if (rendererProps.height != null)
-			this.rendererHeight = rendererProps.height;
 
-		setRenderer(renderer, rendererProps.emitterLayer, rendererProps.addRendererToCurState);
+		this.renderer = renderer;
+		this.emitterLayer = emitterLayer;
 		this.particleConfig = particleConfig;
 		this.mainParticleBehavior = miscProps.mainParticleBehavior;
 		if (miscProps.autoSpawning != null)
 			this.autoSpawning = miscProps.autoSpawning;
 		if (miscProps.waitingSecs != null)
 			this.waitingSecs = miscProps.waitingSecs;
-	}
+		if (miscProps.particlesPerWaitingSecs != null)
+			this.particlesPerWaitingSecs = miscProps.particlesPerWaitingSecs;
+		if (miscProps.maxParticles != null)
+			this.maxParticles = miscProps.maxParticles;
 
-	public function setRenderer(renderer:LunarRenderer, particleEmitterLayer:LunarRenderLayer, addRendererToCurState:Bool = true)
-	{
-		if (particleEmitterLayer != null)
-		{
-			emitterLayer = particleEmitterLayer;
-			personalEmitter = false;
-		}
-		else
-		{
-			personalEmitter = true;
-			emitterLayer = new LunarRenderLayer();
-		}
-		if (renderer != null)
-		{
-			this.renderer = renderer;
-			personalRenderer = false;
-		}
-		else
-		{
-			this.renderer = new LunarRenderer({
-				x: x,
-				y: y,
-				width: rendererWidth,
-				height: rendererHeight
-			});
-			personalRenderer = true;
-		}
-		this.renderer.addLayer(emitterLayer);
-		#if flixelMode
-		try
-		{
-			if (addRendererToCurState)
-				flixel.FlxG.state.add(this.renderer);
-		}
-		catch (e:Dynamic) {}
-		#end
+		FlxG.stage.addEventListener(Event.ENTER_FRAME, onFrame);
 	}
 
 	public function addBehaviorPack(pack:LunarParticleBehaviorPack, overwriteMainBehavior:Bool = true)
@@ -105,10 +66,33 @@ class LunarParticleEmitter
 	{
 		inline function spawn()
 		{
-			var particle = new LunarParticle(x, y, this);
-			particle.shape = shape.copy();
-			particles.push(particle);
-			renderer.add(particle);
+			if (maxParticles > 0 && particles.length >= maxParticles)
+				return;
+			var particle:LunarParticle;
+			if (particles.deadPoolableAvailable)
+			{
+				particle = particles.getDeadPoolable();
+				particle.shape = LGUtils.copyClass(shape);
+				particle.x = x;
+				particle.y = y;
+				particle.behavior = null;
+				particle.dead = false;
+				particle.visible = true;
+				particle.id = 0;
+				particle.values = null;
+				particle.values = new LunarVarAbstract();
+				particle.emitter = this;
+			}
+			else
+			{
+				particle = new LunarParticle(x, y, this);
+				particle.shape = LGUtils.copyClass(shape);
+				particles.addToPool(particle);
+				if (emitterLayer != null)
+					emitterLayer.add(particle);
+				else
+					renderer.add(particle);
+			}
 			if (mainParticleBehavior != null)
 				mainParticleBehavior.onParticleSpawn(particle, this);
 			for (behavior in sideParticleBehaviors)
@@ -138,27 +122,35 @@ class LunarParticleEmitter
 			spawnParticle(shape);
 	}
 
-	public function onFrame(dt:Float)
+	public function onFrame(_)
 	{
+		var dt:Float = FlxG.elapsed;
 		curDt = dt;
 		if (autoSpawning)
 		{
 			if (curSecs <= 0)
 			{
 				curSecs = waitingSecs;
-				spawnParticle(particleConfig);
+				spawnParticleBatch(particleConfig, particlesPerWaitingSecs);
 			}
 			curSecs -= dt;
 		}
 		for (p in particles)
 		{
 			p.onFrame(dt);
-			if (p != null)
+			try
 			{
-				if (mainParticleBehavior != null)
-					mainParticleBehavior.onParticleFrame(p, this, dt);
-				for (behavior in sideParticleBehaviors)
-					behavior.onParticleFrame(p, this, dt);
+				if (p != null)
+				{
+					if (mainParticleBehavior != null)
+						mainParticleBehavior.onParticleFrame(p, this, dt);
+					for (behavior in sideParticleBehaviors)
+						behavior.onParticleFrame(p, this, dt);
+				}
+			}
+			catch (e)
+			{
+				lunarps.LGUtils.LunarLogger.error('On particle frame error(${e.message}) Stack: ${e.stack.toString()}\n');
 			}
 		}
 	}
@@ -168,8 +160,6 @@ class LunarParticleEmitter
 		for (p in particles)
 			p.kill();
 		particles = null;
-		if (personalRenderer)
-			renderer = null;
 		particleConfig = null;
 		mainParticleBehavior = null;
 	}

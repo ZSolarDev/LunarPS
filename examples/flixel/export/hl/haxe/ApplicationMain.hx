@@ -35,7 +35,7 @@ class ApplicationMain
 		ManifestResources.init(config);
 		#end
 
-		app.meta["build"] = "28";
+		app.meta["build"] = "30";
 		app.meta["company"] = "HaxeFlixel";
 		app.meta["file"] = "LunarPS";
 		app.meta["name"] = "LunarPS";
@@ -52,7 +52,7 @@ class ApplicationMain
 			borderless: false,
 			// display: 0,
 			element: null,
-			frameRate: 250,
+			frameRate: 60,
 			#if !web fullscreen: false, #end
 			height: 480,
 			hidden: #if munit true #else false #end,
@@ -105,7 +105,7 @@ class ApplicationMain
 		app.window.title = "LunarPS";
 		#else
 		app.window.context.attributes.background = 0;
-		app.window.frameRate = 250;
+		app.window.frameRate = 60;
 		#end
 
 		var preloader = getPreloader();

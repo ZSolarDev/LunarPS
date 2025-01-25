@@ -18,3 +18,10 @@ I want LunarPS(aka LunarParticleSystem/LPS) to be a highly flexlble particle sys
 2. Read the wiki.
 
 # What does it look like?
+-# (The gifs are gonna look a bit laggy, but they run at perfect performance in-engine.)
+
+<h1 align="center">
+  <img width="400" src="https://raw.githubusercontent.com/ZSolarDev/LunarPS/refs/heads/main/assets/snow.gif">
+  <br>
+  <img width="400" src="https://raw.githubusercontent.com/ZSolarDev/LunarPS/refs/heads/main/assets/rain.gif">
+</h1>

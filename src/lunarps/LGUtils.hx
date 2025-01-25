@@ -1,6 +1,8 @@
 package lunarps;
 
+import flixel.FlxG;
 import haxe.PosInfos;
+import openfl.events.Event;
 
 /**
  * A simple logger with colors.
@@ -10,27 +12,68 @@ import haxe.PosInfos;
 class LunarLogger
 {
 	public static function log(msg:Dynamic, ?_posInfos:PosInfos) // white
-		return Sys.println('\033[0;37m LOG: (${_posInfos.className}) $msg\033[0;0m');
+		return
+			#if !html5
+			Sys.println('\033[0;37m LOG: (${_posInfos.className}) $msg\033[0;0m');
+			#else
+			trace('\033[0;37m LOG: $msg\033[0;0m');
+			#end
 
 	public static function info(msg:Dynamic, ?_posInfos:PosInfos) // light gray
-		return LGUtils.infoLogs ? Sys.println('\033[0;250m INFO: (${_posInfos.className}) $msg\033[0;0m') : null;
+		return
+			#if !html5
+			LGUtils.infoLogs ? Sys.println('\033[0;250m INFO: (${_posInfos.className}) $msg\033[0;0m') : null;
+			#else
+			LGUtils.infoLogs ? trace('\033[0;250m INFO: $msg\033[0;0m') : null;
+			#end
 
 	public static function warning(msg:Dynamic, ?_posInfos:PosInfos) // yellow
-		return LGUtils.warningLogs ? Sys.println('\033[0;33m WARNING: (${_posInfos.className}) $msg\033[0;0m') : null;
+		return
+			#if !html5
+			LGUtils.warningLogs ? Sys.println('\033[0;33m WARNING: (${_posInfos.className}) $msg\033[0;0m') : null;
+			#else
+			LGUtils.warningLogs ? trace('\033[0;33m WARNING: $msg\033[0;0m') : null;
+			#end
 
 	public static function debug(msg:Dynamic, ?_posInfos:PosInfos) // cyan
-		return #if debug Sys.println('\033[0;36m DEBUG: (${_posInfos.className}) $msg\033[0;0m') #else null #end;
+		#if debug
+		return #if !html5
+			Sys.println('\033[0;36m DEBUG: (${_posInfos.className}) $msg\033[0;0m');
+		#else
+			trace('\033[0;36m DEBUG: $msg\033[0;0m');
+		#end
+		#else
+		return null;
+		#end
 
 	public static function error(msg:Dynamic, ?_posInfos:PosInfos) // red
-		return LGUtils.errorLogs ? Sys.println('\033[0;31m ERROR: (${_posInfos.className}) $msg\033[0;0m') : null;
+		return
+			#if !html5
+			LGUtils.errorLogs ? Sys.println('\033[0;31m ERROR: (${_posInfos.className}) $msg\033[0;0m') : null;
+			#else
+			LGUtils.errorLogs ? trace('\033[0;31m ERROR: $msg\033[0;0m') : null;
+			#end
 
 	public static function fatalError(msg:Dynamic, ?_posInfos:PosInfos) // bright red bg -> red/bold
-		return Sys.println('\033[41m FATAL ERROR: \033[0;0m\033[1;91m (${_posInfos.className}) $msg\033[0;0m');
+		return
+			#if !html5
+			Sys.println('\033[41m FATAL ERROR: \033[0;0m\033[1;91m (${_posInfos.className}) $msg\033[0;0m');
+			#else
+			trace('\033[41m FATAL ERROR: \033[0;0m\033[1;91m $msg\033[0;0m');
+			#end
+}
+
+enum LunarTimerMode
+{
+	TIMER;
+	STOPWATCH;
 }
 
 class LunarTimer
 {
-	public var timeLeft:Float = 0;
+	var _mode:LunarTimerMode = TIMER;
+
+	public var time:Float = 0;
 	public var loopsLeft:Int = 0;
 	public var running:Bool = false;
 	public var stopped:Bool = false;
@@ -39,50 +82,70 @@ class LunarTimer
 	public var loopCompleted:(loopID:Int) -> Void = (loopID) -> {};
 
 	public function new()
-		return;
+	{
+		FlxG.stage.addEventListener(Event.ENTER_FRAME, onFrame);
+	}
 
-	public function pauseTimer()
+	public function pause()
 	{
 		paused = true;
 	}
 
-	public function unpauseTimer()
+	public function unpause()
 	{
 		paused = false;
 	}
 
-	public function stopTimer()
+	public function stop()
 	{
 		running = false;
 		paused = false;
 		stopped = true;
-		timeLeft = 0;
+		time = 0;
 	}
 
-	public function startTimer(dt:Float, ?durationSecs:Float = 1, ?loopsLeft:Int = 0)
+	public function startTimer(?durationSecs:Float = 1, ?loops:Int = 0)
 	{
+		_mode = TIMER;
 		running = true;
-		timeLeft = durationSecs;
+		time = durationSecs;
 		stopped = false;
-		this.loopsLeft = loopsLeft;
+		this.loopsLeft = loops;
 	}
 
-	public function updateTimer(dt:Float)
+	public function startStopwatch()
 	{
-		if (running && !paused && timeLeft > 0)
-			timeLeft -= dt;
-		if (timeLeft <= 0 && !stopped && running)
+		_mode = STOPWATCH;
+		running = true;
+		time = 0;
+		stopped = false;
+		loopsLeft = 0;
+	}
+
+	public function onFrame(_)
+	{
+		var dt:Float = FlxG.elapsed;
+		switch (_mode)
 		{
-			if (loopsLeft == 0)
-			{
-				stopTimer();
-				timerCompleted();
-			}
-			else
-			{
-				loopsLeft--;
-				loopCompleted(loopsLeft);
-			}
+			case TIMER:
+				if (running && !paused && time > 0)
+					time -= dt;
+				if (time <= 0 && !stopped && running)
+				{
+					if (loopsLeft == 0)
+					{
+						stop();
+						timerCompleted();
+					}
+					else
+					{
+						loopsLeft--;
+						loopCompleted(loopsLeft);
+					}
+				}
+			case STOPWATCH:
+				if (running && !paused)
+					time += dt;
 		}
 	}
 }
@@ -93,8 +156,19 @@ class LGUtils
 	public static var warningLogs:Bool = true;
 	public static var errorLogs:Bool = true;
 
-	public static function init()
+	public static function copyClass<T>(c:T):T
 	{
-		flixel.FlxG.fixedTimestep = false;
+		var cls:Class<T> = Type.getClass(c);
+		var inst:T = Type.createEmptyInstance(cls);
+		var fields = Type.getInstanceFields(cls);
+		for (field in fields)
+		{
+			var val:Dynamic = Reflect.field(c, field);
+			if (!Reflect.isFunction(val))
+			{
+				Reflect.setField(inst, field, val);
+			}
+		}
+		return inst;
 	}
 }

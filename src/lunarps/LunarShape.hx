@@ -7,6 +7,7 @@ import lunarps.renderer.backends.flixel.Shaders;
 
 enum LunarShapeType
 {
+	NONE;
 	CIRCLE;
 	RECTANGLE;
 	TEXTURE;
@@ -14,25 +15,46 @@ enum LunarShapeType
 
 class LunarShape
 {
-	public var color:Int;
-	public var shapeType(default, null):LunarShapeType;
-	public var alpha(default, set):Int = 256;
+	public var color(default, set):Int;
+	public var shapeType(default, null):LunarShapeType = NONE;
 
-	public function new(color:Int)
+	public var alpha(default, set):Int = 256;
+	public var angle:Float = 0;
+
+	@:allow(lunarps.renderer.backends.flixel.MeshFactory)
+	var _angle(get, default):Float;
+
+	public function new(color:Int, alpha:Int = 256, angle:Float = 0)
 	{
 		this.color = color;
+		this.alpha = alpha;
+		this.angle = angle;
+	}
+
+	function get__angle():Float
+	{
+		return angle * (Math.PI / 180);
+	}
+
+	var fromAlpha:Bool = false; // preventing stack overflow
+
+	function set_color(val:Int):Int
+	{
+		color = val;
+		if (!fromAlpha)
+			set_alpha(alpha);
+		return color;
 	}
 
 	function set_alpha(val:Int):Int
 	{
 		alpha = val;
+		fromAlpha = true;
 		color &= 0x00ffffff;
 		color |= (alpha > 0xff ? 0xff : alpha < 0 ? 0 : alpha) << 24;
+		fromAlpha = false;
 		return alpha;
 	}
-
-	public function copy():LunarShape
-		return Copy.copy(this);
 }
 
 class LunarRect extends LunarShape
@@ -49,17 +71,15 @@ class LunarRect extends LunarShape
 	}
 }
 
-class LunarCircle extends LunarShape
+class LunarCircle extends LunarRect
 {
-	public var radius:Float;
 	@:allow(lunarps.renderer.backends.flixel.MeshFactory)
 	public var shader:CircleShader = new CircleShader();
 
-	public function new(color:Int, radius:Float)
+	public function new(color:Int, ?width:Float = 0, ?height:Float = 0)
 	{
-		super(color);
+		super(color, width, height);
 		shapeType = CIRCLE;
-		this.radius = radius;
 	}
 }
 
