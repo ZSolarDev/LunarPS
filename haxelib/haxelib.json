@@ -1,0 +1,22 @@
+{
+    "name":"LunarPS",
+    "license": "MIT",
+    "version": "2.0.1",
+    "url": "https://github.com/ZSolarDev/LunarPS",
+    "description": "LunarPS: the new FlxEmitter.",
+    "releasenote": "Fixed a bug with me not realizing to remove import.hx causing some classes to be used that weren't actually imported.",
+    "contributors": [
+        "ZSolarDev",
+        "Aura39"
+    ],
+    "dependencies": {
+        "flixel": "",
+        "openfl": ""
+    },
+    "classPath": "src",
+    "tags": [
+        "haxe",
+        "flixel",
+        "particles"
+    ]
+}
