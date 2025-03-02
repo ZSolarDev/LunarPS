@@ -4,7 +4,7 @@
     "version": "2.0.2",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "Fixed the error function being unknown in LunarInterp and adjsted LunarParticleEmitter a bit.",
+    "releasenote": "Fixed the error function being unknown in LunarInterp and adjusted LunarParticleEmitter a bit.",
     "contributors": [
         "ZSolarDev",
         "Aura39"
