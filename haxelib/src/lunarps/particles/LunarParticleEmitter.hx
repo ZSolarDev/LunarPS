@@ -33,7 +33,7 @@ class LunarParticleEmitter
 	public var autoSpawning:Bool = true;
 	public var curDt:Float = 0;
 
-	public function new(x:Float = 0, y:Float = 0, renderer:LunarRenderer, particleConfig:LunarShape, ?emitterLayer:LunarRenderLayer, miscProps:MiscProps)
+	public function new(x:Float = 0, y:Float = 0, renderer:LunarRenderer, particleConfig:LunarShape, ?emitterLayer:LunarRenderLayer, ?miscProps:MiscProps)
 	{
 		this.x = x;
 		this.y = y;
@@ -41,22 +41,27 @@ class LunarParticleEmitter
 		this.renderer = renderer;
 		this.emitterLayer = emitterLayer;
 		this.particleConfig = particleConfig;
-		this.mainParticleBehavior = miscProps.mainParticleBehavior;
-		if (miscProps.autoSpawning != null)
-			this.autoSpawning = miscProps.autoSpawning;
-		if (miscProps.waitingSecs != null)
-			this.waitingSecs = miscProps.waitingSecs;
-		if (miscProps.particlesPerWaitingSecs != null)
-			this.particlesPerWaitingSecs = miscProps.particlesPerWaitingSecs;
-		if (miscProps.maxParticles != null)
-			this.maxParticles = miscProps.maxParticles;
+		if (miscProps != null)
+		{
+			this.mainParticleBehavior = miscProps.mainParticleBehavior;
+			if (miscProps.autoSpawning != null)
+				this.autoSpawning = miscProps.autoSpawning;
+			if (miscProps.waitingSecs != null)
+				this.waitingSecs = miscProps.waitingSecs;
+			if (miscProps.particlesPerWaitingSecs != null)
+				this.particlesPerWaitingSecs = miscProps.particlesPerWaitingSecs;
+			if (miscProps.maxParticles != null)
+				this.maxParticles = miscProps.maxParticles;
+		}
 
 		FlxG.stage.addEventListener(Event.ENTER_FRAME, onFrame);
 	}
 
-	public function addBehaviorPack(pack:LunarParticleBehaviorPack, overwriteMainBehavior:Bool = true)
+	public function addBehaviorPack(pack:LunarParticleBehaviorPack, overwriteMainBehavior:Bool = true, overwriteParticleConfig:Bool = true)
 	{
-		if (overwriteMainBehavior)
+		if (overwriteParticleConfig && pack.particleConfig != null)
+			particleConfig = pack.particleConfig;
+		if (overwriteMainBehavior && pack.mainBehavior != null)
 			mainParticleBehavior = pack.mainBehavior;
 		for (behavior in pack.sideBehaviors.keys())
 			addBehavior(behavior, pack.sideBehaviors.get(behavior));

@@ -77,7 +77,7 @@ class LunarInterp
 		}
 		catch (_)
 		{
-			error('Unknown ease: $e: defaulting to a linear interpolation.');
+			lunarps.LGUtils.LunarLogger.error('Unknown ease: $e: defaulting to a linear interpolation.');
 			return linearInterp(a, b, r);
 		}
 

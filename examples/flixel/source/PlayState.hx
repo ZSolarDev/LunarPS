@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import lunarps.LunarShape;
 import lunarps.particles.*;
+import lunarps.particles.behavior_packs.*;
 import lunarps.particles.behaviors.*;
 import lunarps.renderer.LunarRenderer;
 
@@ -12,12 +13,13 @@ enum Demo
 {
 	RAIN;
 	SNOW;
+	FIRE;
 	STRESS_TEST;
 }
 
 class PlayState extends FlxState
 {
-	var demo:Demo = RAIN;
+	var demo:Demo = FIRE;
 	var spawnBatches:Bool = false;
 	var system:LunarParticleSystem = new LunarParticleSystem();
 
@@ -92,6 +94,10 @@ class PlayState extends FlxState
 				emitterBG.addBehavior('initial velocity', new LunarRandomInitialVelocityParticleBehavior(-2, -5, 3, 6));
 				emitterBG.addBehavior('signal but in the bg x3', signalBG);
 				system.addEmitter('blizzardBackground', emitterBG);
+			case FIRE:
+				var emitter = new LunarParticleEmitter(0, 0, renderer, new LunarRect(0xFF, 10, 10), null, {});
+				emitter.addBehaviorPack(new LunarFireParticleBehaviorPack());
+				system.addEmitter('fire', emitter);
 			case STRESS_TEST:
 				var stressTest = new LunarParticleEmitter(0, 0, renderer, new LunarCircle(0xFFFFFFFF, 10, 10), null,
 					{autoSpawning: true, waitingSecs: 0, particlesPerWaitingSecs: 10});
@@ -106,13 +112,13 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		if (FlxG.keys.justPressed.ENTER && demo != STRESS_TEST)
+		if (FlxG.keys.justPressed.ENTER && demo != STRESS_TEST && demo != FIRE)
 			spawnBatches = !spawnBatches;
 
-		if (demo != STRESS_TEST)
+		if (demo != STRESS_TEST && demo != FIRE)
 			system.setEmitterProperty('autoSpawning', spawnBatches ? false : true);
 
-		if (FlxG.keys.justPressed.SPACE && demo != STRESS_TEST)
+		if (FlxG.keys.justPressed.SPACE && demo != STRESS_TEST && demo != FIRE)
 		{
 			if (spawnBatches)
 			{

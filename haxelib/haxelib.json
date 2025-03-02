@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "Fixed a bug with me not realizing to remove import.hx causing some classes to be used that weren't actually imported.",
+    "releasenote": "Fixed the error function being unknown in LunarInterp and adjsted LunarParticleEmitter a bit.",
     "contributors": [
         "ZSolarDev",
         "Aura39"
