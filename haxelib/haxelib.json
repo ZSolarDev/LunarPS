@@ -1,10 +1,10 @@
 {
     "name":"LunarPS",
     "license": "MIT",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "url": "https://github.com/ZSolarDev/LunarPS",
     "description": "LunarPS: the new FlxEmitter.",
-    "releasenote": "Fixed the error function being unknown in LunarInterp and adjusted LunarParticleEmitter a bit.",
+    "releasenote": "Added ParticleConfig to LunarParticleBehaviorPack.",
     "contributors": [
         "ZSolarDev",
         "Aura39"
